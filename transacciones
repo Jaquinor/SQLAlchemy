@@ -19,4 +19,11 @@ with engine.begin() as conn:
     conn.execute(
         text("INSERT INTO tabla (x, y) VALUES (:x, :y)"),
         [{"x": 6, "y": 8}, {"x": 9, "y": 10}],
-    )    
+    )
+
+# Obteniendo filas    
+    
+with engine.connect() as conn:
+    result = conn.execute(text("SELECT x, y FROM tabla"))
+    for row in result:
+        print(f"x: {row.x}  y: {row.y}") 
